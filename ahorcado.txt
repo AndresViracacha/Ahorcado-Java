@@ -7,15 +7,12 @@ public class Proyecto {
 		int vidas=0;
 		String letra,palabra;
 		char volverAJugar;
-		Scanner teclado = new Scanner(System.in);		
-		//Ingresamos la palabra que se usara
-		System.out.println("escribe la palabra con la que quieras jugar");
-		 palabra = teclado.nextLine();	
-		//se crea el arreglo para saber que letras han dado correctas y cuales faltan
+		Scanner teclado = new Scanner(System.in);
+		System.out.println("Escribe la palabra con la que quieras jugar (No uses mayusculas)");
+		palabra = teclado.nextLine();			
 		int[] letrasCorrectas = new int[palabra.length()];
 		System.out.println("Ingresa la cantidad de vidas con las que quieras jugar");
-		vidas = teclado.nextInt();
-		/*cuantas letras hay*/
+		vidas = teclado.nextInt();	
 		mostrarCaracteres(palabra);
 		System.out.println(" ");		
 		while(juego) {				
@@ -23,30 +20,31 @@ public class Proyecto {
 			letra = teclado.next();
 			if(letra.startsWith("p")) {
 				juego=false;
-			}
-			//se da como retorno vidas para que guarde el nuevo valor dentro de la misma
+			}			
 			vidas = identificarLetra(palabra,letra.charAt(0),letrasCorrectas,vidas);
 			mostrarLetrasCorrectas(palabra,letrasCorrectas);
 			System.out.println(" ");	
 			System.out.println("Vidas Restantes: " +vidas);
 			juego = perder(vidas,juego);
 			if(verificarGano(letrasCorrectas)) {
-				System.out.println("Felicidades has ganado");
+				System.out.println("Felicidades, has ganado!!!");
 				juego=false;
 			}
-			if(!juego) {
-				System.out.println("Quieres volver a jugar? s/n");
-				volverAJugar = teclado.next().toLowerCase().charAt(0);
-				if(volverAJugar=='s') {
-					System.out.println("a jugar!");
-					juego=true;
-					vidas=5;
+			
 				}	
 			}
 			
-		}
-		
+	public static char pregunta1(String menu, Scanner teclado) {
+        char volverAJugar;
+        System.out.println(menu + " (s/n)");
+        volverAJugar = teclado.next().toLowerCase().charAt(0);
+        while (volverAJugar != 's' && volverAJugar != 'n') {
+            System.out.println("Error! solo se admite S o N");
+            volverAJugar = teclado.next().toLowerCase().charAt(0);
+        }
+		return volverAJugar;
 	}
+
 	public static void mostrarCaracteres(String palabra) {
 		for(int i = 0; i<palabra.length();i++) {
 			System.out.print("_ ");		
@@ -92,6 +90,10 @@ public class Proyecto {
 		if(contador==letrasCorrectas.length) {
 			gano=true;
 		}
+		
+	
 		return gano;
 	}
-}
+		
+		
+	}
